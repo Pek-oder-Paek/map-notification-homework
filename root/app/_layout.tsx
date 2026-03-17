@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import * as Notifications from "expo-notifications";
-import { Stack, useRouter } from "expo-router";
+import { Stack, Tabs, useRouter } from "expo-router";
 
 export default function RootLayout() {
   const router = useRouter();
@@ -18,8 +18,8 @@ export default function RootLayout() {
           router.push({
             pathname: "/map",
             params: {
-              lat: eventData.latitude,
-              lng: eventData.longitude,
+              lat: eventData.latitude.toString(),
+              lng: eventData.longitude.toString(),
             },
           });
         }
@@ -30,7 +30,11 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <Stack/>
-  )
+    <Tabs>
+      <Tabs.Screen name="index" options={{ title: "Home" }} />
+
+      <Tabs.Screen name="map" options={{ title: "Map View" }} />
+    </Tabs>
+  );
   // ... rest of your layout code
 }
